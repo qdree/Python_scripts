@@ -44,8 +44,8 @@ class Input:
 	def draw(self, surface):
 		""" Draw the text input to a surface """
 
-		textSurf = self.font.render(self.prompt + ' ' + self.value, 1, self.color)
-		# textSurf = self.font.render(self.prompt + ' ' + self.hidden, 1, self.color)
+		# textSurf = self.font.render(self.prompt + ' ' + self.value, 1, self.color)
+		textSurf = self.font.render(self.prompt + ' ' + self.hidden, 1, self.color)
 		textRect = textSurf.get_rect()
 		textRect.center = (640 / 2.0, 280 / 2.0)
 		surface.blit(textSurf, textRect)
@@ -170,13 +170,14 @@ class Input:
 
 
 	def chk_value(self, ref):
-		#while not self.buf == ref:
-		print ("input val", type(self.value), self.value)
-		print ("reference str", type(ref), ref)
-		self.buf += self.value
-		# else:
-		if self.buf == ref:
+		print ("input val type is {0}, it contains {1} and len is {2}".format(type(self.value), self.value, len(self.value)))
+		print ("reference string type is {0}, it contains {1} and len is {2}".format(type(ref), ref, len(ref)))
+		print ("buffer type is {0}, it contains {1} and len is {2}".format(type(self.buf), self.buf, len(self.buf)))
+		# self.buf = self.value
+		if self.value == ref:
 			return  True
+		else:
+			return False
 	
 	def get_value(self):
 	#while not self.buf == ref:

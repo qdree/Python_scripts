@@ -25,25 +25,27 @@ def main():
 
         # events for txtbx
         events = pygame.event.get()
+
         # process other events
         for event in events:
             # close it x button si pressed
             if event.type == QUIT: return
 
-        # txtbx.set_pos(1280 / 2.0, 1024 / 2.0)
         # clear the screen
         screen.fill((0,0,0))
+        
         # update txtbx
         txtbx.update(events)
+
+        # check password input
         if txtbx.chk_value(password):
             print "correct"
-        # r_pass = txtbx.get_value()
-        # print r_pass, '\n        '
-
-        # if r_pass == password:
-        #     print "correct"
+        else:
+            print "something wrong"
+        
         # blit txtbx on the sceen
         txtbx.draw(screen)
+        
         # refresh the display
         pygame.display.flip()
 
