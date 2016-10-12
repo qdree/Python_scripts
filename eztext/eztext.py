@@ -172,7 +172,7 @@ class Input:
 		print ("reference string type is {0}, it contains {1} and len is {2}".format(type(ref), ref, len(ref)))
 		print ("buffer type is {0}, it contains {1} and len is {2}".format(type(self.buf), self.buf, len(self.buf)))
 		# self.buf = self.value
-		if self.value == ref:
+		if self.value.lower() == ref.lower():
 			return  True
 		else:
 			return False
