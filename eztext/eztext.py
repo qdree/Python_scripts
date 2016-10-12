@@ -1,6 +1,6 @@
 # input lib
 from pygame.locals import *
-import pygame, string
+import pygame, string, re
 
 class ConfigError(KeyError): pass
 
@@ -29,8 +29,8 @@ class Input:
 		self.maxlength = self.options.maxlength
 		self.prompt = self.options.prompt; self.value = ''
 		self.shifted = False
-		self.buf = ''
 		self.hidden = ''
+		self.buf = ''
 
 	def set_pos(self, x, y):
 		""" Set the position to x, y """
@@ -43,8 +43,10 @@ class Input:
 
 	def draw(self, surface):
 		""" Draw the text input to a surface """
-
 		# textSurf = self.font.render(self.prompt + ' ' + self.value, 1, self.color)
+
+		self.hidden = self.value.replace(self.value, "*" * len(self.value))
+
 		textSurf = self.font.render(self.prompt + ' ' + self.hidden, 1, self.color)
 		textRect = textSurf.get_rect()
 		textRect.center = (640 / 2.0, 280 / 2.0)
@@ -65,8 +67,6 @@ class Input:
 					self.hidden += ' '
 
 				if not self.shifted:
-					if event.key != K_BACKSPACE or event.key != K_LSHIFT or event.key != K_RSHIFT:
-						self.hidden += '*'
 					if event.key == K_a and 'a' in self.restricted: self.value += 'a'
 					elif event.key == K_b and 'b' in self.restricted: self.value += 'b'
 					elif event.key == K_c and 'c' in self.restricted: self.value += 'c'
@@ -115,8 +115,6 @@ class Input:
 					elif event.key == K_PERIOD and '.' in self.restricted: self.value += '.'
 					elif event.key == K_SLASH and '/' in self.restricted: self.value += '/'
 				elif self.shifted:
-					if event.key != K_BACKSPACE or event.key != K_LSHIFT or event.key != K_RSHIFT:
-						self.hidden += '*'
 					if event.key == K_a and 'A' in self.restricted: self.value += 'A'
 					elif event.key == K_b and 'B' in self.restricted: self.value += 'B'
 					elif event.key == K_c and 'C' in self.restricted: self.value += 'C'
@@ -179,8 +177,8 @@ class Input:
 		else:
 			return False
 	
-	def get_value(self):
-	#while not self.buf == ref:
-	# print ("input val", type(self.value), self.value)
-		self.buf += self.value
-		return self.buf
+	# def get_value(self):
+	# 	while not self.buf == ref:
+	# 		print ("input val", type(self.value), self.value)
+	# 		self.buf += self.value
+	# 	return self.buf
