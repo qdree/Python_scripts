@@ -49,7 +49,7 @@ class Input:
 
 		textSurf = self.font.render(self.prompt + ' ' + self.hidden, 1, self.color)
 		textRect = textSurf.get_rect()
-		textRect.center = (640 / 2.0, 280 / 2.0)
+		textRect.center = (self.x, self.y)
 		surface.blit(textSurf, textRect)
 
 	def update(self, events):

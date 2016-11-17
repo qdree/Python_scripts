@@ -1,27 +1,33 @@
 # EzText example
 from pygame.locals import *
 import pygame, sys, eztext
+import gtk.gdk
+
+width = gtk.gdk.screen_width()
+height = gtk.gdk.screen_height()
 
 password = 'arsenal'
 
 def main():
     # initialize pygame
     pygame.init()
+
     # create the screen
-    screen = pygame.display.set_mode((640,280))
-    # fill the screen w/ white
+    screen = pygame.display.set_mode((width,height))
+    
+    # fill the screen black
     screen.fill((255,255,255))
-    # here is the magic: making the text input
-    # create an input with a max length of 45,
-    # and a red color and a prompt saying 'type here: '
+
     txtbx = eztext.Input(maxlength=40, color=(255,255,255), prompt='PASSWORD:')
     # create the pygame clock
+    
     clock = pygame.time.Clock()
     # main loop!
 
     while 1:
         # make sure the program is running at 30 fps
         clock.tick(15)
+        txtbx.set_pos(width/2.0,height/2.0)
 
         # events for txtbx
         events = pygame.event.get()
